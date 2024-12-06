@@ -8,6 +8,7 @@
 	    		<h2 class="text-center">메모 상세</h2>
 	    		<input type="text" class="form-control mt-4" th:value="${memo.title}" placeholder="제목을 입력하세요" id="titleInput">
 	    		<textarea class="form-control mt-2" rows="10" placeholder="내용을 입력하세요" id="contentsInput" th:text="${memo.contents}">여기는 메모 내용</textarea>
+	    		<img th:src="${memo.imagePath}">
 	    		<div class="d-flex justify-content-between mt-3">
 	    			<button type="button" class="btn btn-danger">삭제</button>
 	    			<div>

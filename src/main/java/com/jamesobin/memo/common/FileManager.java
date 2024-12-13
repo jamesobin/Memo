@@ -14,6 +14,10 @@ public class FileManager {
 	public static final String FILE_UPLOAD_PATH = "E:\\웹개발\\06.springProject\\upload\\memo";
 	
 	public static String saveFile(int userId, MultipartFile file) {
+		if(file == null) {
+			return null;
+		}
+		
 		// 파일 이름 유지
 		// 같은 이름의 파일이 전달 될 경우를 대비해서 디렉토리를 만들어서 파일 저장
 		// 디렉토리 이름에 사용자 정보 포함
@@ -50,6 +54,30 @@ public class FileManager {
 		// E:\\웹개발\\06.springProject\\upload\\memo/2_89723498273/test.png
 		// /images/2_89723498273/test.png
 		return "/images" + directoryName + "/" + file.getOriginalFilename();
+	}
+	
+	public static boolean removeFile(String filePath) { // /images/2_89723498273/test.png
+		if(filePath == null) {
+			return false;
+		}
+		
+		// E:\\웹개발\\06.springProject\\upload\\memo/2_89723498273/test.png
+		
+		String fullFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		Path path = Paths.get(fullFilePath);
+		
+		Path directoryPath = path.getParent();
+		
+		try {
+			Files.delete(path);
+			Files.delete(directoryPath);
+			
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+			return false;
+		}
 	}
 	
 }
